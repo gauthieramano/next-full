@@ -2,6 +2,7 @@
 
 import { SignInButton, UserButton } from "@clerk/nextjs";
 import { Authenticated, Unauthenticated } from "convex/react";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
   return (
@@ -13,7 +14,9 @@ export default function Home() {
         </Authenticated>
 
         <Unauthenticated>
-          <SignInButton />
+          <SignInButton>
+            <Button>Sign in</Button>
+          </SignInButton>
         </Unauthenticated>
       </div>
     </div>
