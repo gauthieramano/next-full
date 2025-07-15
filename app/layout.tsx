@@ -1,3 +1,4 @@
+import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ConvexClientProvider } from "@/providers/convex-client";
@@ -28,7 +29,9 @@ export default function RootLayout({ children }: Props) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ConvexClientProvider>{children}</ConvexClientProvider>
+        <ClerkProvider>
+          <ConvexClientProvider>{children}</ConvexClientProvider>
+        </ClerkProvider>
       </body>
     </html>
   );
