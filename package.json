@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "dev": "npm run check-env && next dev --turbopack",
+    "build": "npm run check-env && next build",
+    "start": "npm run check-env && next start",
+    "lint": "next lint",
+    "check-env": "[[ -f .env.local ]] && a=\"--env-file=.env.local\"; tsx $a scripts/check-env.ts"
   },
   "dependencies": {
     "@clerk/nextjs": "^6.25.0",
