@@ -3,11 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "dev": "npm run check-env && next dev",
+    "build": "npm run check-env && next build",
+    "start": "npm run check-env && next start",
     "lint": "biome check",
-    "format": "biome format --write"
+    "format": "biome format --write",
+    "check-env": "[[ -f .env.local ]] && a=\"--env-file=.env.local\"; tsx $a scripts/check-env.ts"
   },
   "dependencies": {
     "@clerk/nextjs": "^6.35.2",
