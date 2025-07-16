@@ -2,6 +2,7 @@ import { currentUser } from "@clerk/nextjs/server";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { unauthorized } from "next/navigation";
+import { Suspense } from "react";
 import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
@@ -20,14 +21,17 @@ export default async function Private({ params }: Props) {
     unauthorized();
   }
 
-  const { id } = await params;
-
   const date = new Date().toLocaleString("fr-FR");
 
   return (
     <div className="font-sans grid grid-cols-1 items-center justify-items-center min-h-screen p-8 sm:p-20">
       <div>
-        <h2 className="text-3xl font-semibold">PRIVATE / {id}</h2>
+        <h2 className="text-3xl font-semibold">
+          PRIVATE /{" "}
+          <Suspense fallback={<Loading />}>
+            <Id params={params} />
+          </Suspense>
+        </h2>
         <p>{date}</p>
         <p>{user?.fullName}</p>
         <Button asChild>
@@ -38,4 +42,16 @@ export default async function Private({ params }: Props) {
       </div>
     </div>
   );
+}
+
+async function Id({ params }: Props) {
+  const { id } = await params;
+
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+
+  return <>{id}</>;
+}
+
+async function Loading() {
+  return <span className="text-lg text-destructive">Loading…</span>;
 }
