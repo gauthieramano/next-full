@@ -25,6 +25,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
 import { CONTACT_FORM_SCHEMA } from "@/lib/validation-schemas";
+import { submitForm } from "@/actions/submit-form";
 
 const FORM_SCHEMA = CONTACT_FORM_SCHEMA;
 
@@ -39,13 +40,26 @@ export default function ContactForm() {
   });
 
   async function onSubmit(values: z.infer<typeof FORM_SCHEMA>) {
-    try {
-      // Simulate a successful contact form submission
-      console.log(values);
-      toast.success("Your message has been sent successfully!");
-    } catch (error) {
-      console.error("Error submitting contact form", error);
+    const formData = new FormData();
+
+    formData.append("name", values.name);
+    formData.append("email", values.email);
+    formData.append("message", values.message);
+
+    // call the server action
+    const { data: success, errors } = await submitForm(formData);
+
+    if (errors) {
+      // handle errors (e.g., display an alert notification or add error messages to the form)
+      console.log("Error submitting contact form", errors);
       toast.error("Failed to send your message. Please try again.");
+    }
+
+    if (success) {
+      // handle success (e.g., display a success notification)
+      console.log(success);
+      toast.success("Your message has been sent successfully!");
+      form.reset();
     }
   }
 
