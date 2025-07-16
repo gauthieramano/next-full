@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import UserBadge from "@/components/user-badge";
 import { SignInButton, UserButton, useUser } from "@clerk/nextjs";
 import { Authenticated, Unauthenticated } from "convex/react";
+import Link from "next/link";
 
 export default function Home() {
   const { user } = useUser();
@@ -15,6 +16,9 @@ export default function Home() {
       <div className="flex flex-col gap-8 items-center">
         <Authenticated>
           <div className="flex gap-3 items-center">
+            <Button asChild>
+              <Link href="/private/from-home">Private page</Link>
+            </Button>
             <UserBadge name={name} />
             <UserButton />
           </div>
