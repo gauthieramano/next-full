@@ -24,22 +24,20 @@ export default async function Private({ params }: Props) {
   const date = new Date().toLocaleString("fr-FR");
 
   return (
-    <div className="font-sans grid grid-cols-1 items-center justify-items-center min-h-screen p-8 sm:p-20">
-      <div>
-        <h2 className="text-3xl font-semibold">
-          PRIVATE /{" "}
-          <Suspense fallback={<Loading />}>
-            <Id params={params} />
-          </Suspense>
-        </h2>
-        <p>{date}</p>
-        <p>{user?.fullName}</p>
-        <Button asChild>
-          <Link href="/" className="mt-8">
-            Back to Home
-          </Link>
-        </Button>
-      </div>
+    <div>
+      <h2 className="text-3xl font-semibold">
+        PRIVATE /{" "}
+        <Suspense fallback={<Loading />}>
+          <Id params={params} />
+        </Suspense>
+      </h2>
+      <p>{date}</p>
+      <p>{user?.fullName}</p>
+      <Button asChild>
+        <Link href="/" className="mt-8">
+          Back to Home
+        </Link>
+      </Button>
     </div>
   );
 }
