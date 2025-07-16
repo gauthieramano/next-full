@@ -1,5 +1,6 @@
 "use client";
 
+import ContactForm from "@/components/contact-form";
 import ErrorBoundary from "@/components/error-boundary";
 import { Button } from "@/components/ui/button";
 import UserBadge from "@/components/user-badge";
@@ -24,7 +25,7 @@ export default function Home() {
               <UserBadge name={name} />
               <UserButton />
             </div>
-            <div>PRIVATE CONTENT</div>
+            <ContactForm />
           </Authenticated>
 
           <Unauthenticated>
