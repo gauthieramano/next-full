@@ -6,6 +6,7 @@ import UserBadge from "@/components/user-badge";
 import { SignInButton, UserButton, useUser } from "@clerk/nextjs";
 import { Authenticated, Unauthenticated } from "convex/react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   const { user } = useUser();
@@ -28,6 +29,7 @@ export default function Home() {
           </Authenticated>
 
           <Unauthenticated>
+            <ThrowByGA />
             <SignInButton>
               <Button>Sign in</Button>
             </SignInButton>
@@ -35,5 +37,28 @@ export default function Home() {
         </ErrorBoundary>
       </div>
     </div>
+  );
+}
+
+function ThrowByGA() {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [data, setData] = useState<any>({ nop: "" });
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (count === 1) {
+        setData(null);
+      }
+
+      setCount(count + 1);
+    }, 1000);
+  }, [count]);
+
+  return (
+    <span>
+      {count}
+      {data.nop}
+    </span>
   );
 }
