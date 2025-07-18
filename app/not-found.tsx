@@ -1,11 +1,11 @@
-import Error from "@/components/error";
+import ErrorDisplay from "@/components/error-display";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "PROJ9CT > Not Found",
+  title: "Not Found | PROJ9CT",
   description: "Error 404",
 };
 
 export default function NotFound() {
-  return <Error />;
+  return <ErrorDisplay />;
 }

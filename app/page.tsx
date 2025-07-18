@@ -1,5 +1,6 @@
 "use client";
 
+import ErrorBoundary from "@/components/error-boundary";
 import { Button } from "@/components/ui/button";
 import UserBadge from "@/components/user-badge";
 import { SignInButton, UserButton, useUser } from "@clerk/nextjs";
@@ -14,22 +15,24 @@ export default function Home() {
   return (
     <div className="font-sans grid grid-cols-1 items-center justify-items-center min-h-screen p-8 sm:p-20">
       <div className="flex flex-col gap-8 items-center">
-        <Authenticated>
-          <div className="flex gap-3 items-center">
-            <Button asChild>
-              <Link href="/private/from-home">Private page</Link>
-            </Button>
-            <UserBadge name={name} />
-            <UserButton />
-          </div>
-          <div>PRIVATE CONTENT</div>
-        </Authenticated>
+        <ErrorBoundary>
+          <Authenticated>
+            <div className="flex gap-3 items-center">
+              <Button asChild>
+                <Link href="/private/from-home">Private page</Link>
+              </Button>
+              <UserBadge name={name} />
+              <UserButton />
+            </div>
+            <div>PRIVATE CONTENT</div>
+          </Authenticated>
 
-        <Unauthenticated>
-          <SignInButton>
-            <Button>Sign in</Button>
-          </SignInButton>
-        </Unauthenticated>
+          <Unauthenticated>
+            <SignInButton>
+              <Button>Sign in</Button>
+            </SignInButton>
+          </Unauthenticated>
+        </ErrorBoundary>
       </div>
     </div>
   );

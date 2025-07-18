@@ -1,11 +1,11 @@
-import Error from "@/components/error";
+import ErrorDisplay from "@/components/error-display";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "PROJ9CT > Unauthorized",
+  title: "Unauthorized | PROJ9CT",
   description: "Error 401",
 };
 
 export default function UnauthorizedPage() {
-  return <Error code={401} />;
+  return <ErrorDisplay code={401} />;
 }
