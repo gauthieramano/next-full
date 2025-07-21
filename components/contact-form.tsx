@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import type * as z from "zod";
+import { submitContactForm } from "@/app/actions/submit-contact-form";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -45,8 +46,7 @@ export default function ContactForm() {
       formData.append(...entry);
     });
 
-    // Simulate a successful contact form submission
-    const errors: string[] = [];
+    const errors = await submitContactForm(formData);
 
     if (errors.length) {
       console.error("Errors submitting form", errors);
