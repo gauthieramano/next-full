@@ -1,6 +1,8 @@
 "use server";
 
+import { fetchMutation } from "convex/nextjs";
 import * as z from "zod";
+import { api } from "@/convex/_generated/api";
 import { VALIDATION_SCHEMAS } from "@/lib/validation-schemas";
 
 const { CONTACT_FORM: SCHEMA } = VALIDATION_SCHEMAS;
@@ -10,15 +12,10 @@ const getZodErrors = (error: z.ZodError) =>
 
 export async function submitContactForm(formData: FormData) {
   try {
-    // fake a delay
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
     //validate the FormData
     const fields = SCHEMA.parse(Object.fromEntries(formData));
 
-    console.log({ fields });
-
-    // send validated data to database here
+    await fetchMutation(api.contact.form.addOne, fields);
 
     return [];
   } catch (error) {
