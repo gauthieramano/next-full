@@ -25,6 +25,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
 import { VALIDATION_SCHEMAS } from "@/lib/validation-schemas";
+import { submitContactForm } from "@/app/actions/submit-contact-form";
 
 const { CONTACT_FORM: SCHEMA } = VALIDATION_SCHEMAS;
 
@@ -47,16 +48,18 @@ export default function ContactForm() {
       formData.append(...entry);
     });
 
-    console.log(Object.fromEntries(formData));
+    const errors = await submitContactForm(formData);
 
-    try {
-      // Simulate a successful contact form submission
-      toast.success("Your message has been sent successfully!");
-      form.reset();
-    } catch (error) {
-      console.error("Error submitting contact form", error);
+    if (errors.length) {
+      console.error("Errors submitting form", errors);
       toast.error("Failed to send your message. Please try again.");
+
+      return;
     }
+
+    // Simulate a successful contact form submission
+    toast.success("Your message has been sent successfully!");
+    form.reset();
   }
 
   return (
