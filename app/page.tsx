@@ -4,6 +4,7 @@ import { SignInButton, UserButton, useUser } from "@clerk/nextjs";
 import { Authenticated, Unauthenticated } from "convex/react";
 import Link from "next/link";
 import ContactForm from "@/components/contact-form";
+import { ContactTable } from "@/components/contact-table";
 import ErrorBoundary from "@/components/error-boundary";
 import { Button } from "@/components/ui/button";
 import UserBadge from "@/components/user-badge";
@@ -26,6 +27,7 @@ export default function Home() {
               <UserButton />
             </div>
             <ContactForm />
+            <ContactTable />
           </Authenticated>
 
           <Unauthenticated>
