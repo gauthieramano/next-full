@@ -1,5 +1,16 @@
 import { v } from "convex/values";
-import { mutation } from "../_generated/server";
+import { mutation, query } from "../_generated/server";
+
+export const fetchRecentOnes = query({
+  args: {},
+
+  handler: async (ctx) => {
+    // Get most recent messages first
+    const messages = await ctx.db.query("contacts").order("desc").take(20);
+
+    return messages;
+  },
+});
 
 export const addOne = mutation({
   args: {
