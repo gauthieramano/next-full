@@ -6,7 +6,7 @@
     "dev": "npm run check-env && next dev",
     "build": "npm run check-env && next build",
     "start": "npm run check-env && next start",
-    "lint": "biome check",
+    "lint": "eslint && biome check",
     "format": "biome format --write",
     "check-env": "[[ -f .env.local ]] && a=\"--env-file=.env.local\"; tsx $a scripts/check-env.ts"
   },
