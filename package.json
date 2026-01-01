@@ -32,7 +32,7 @@
     "zod": "^4.1.12"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.3.8",
+    "@biomejs/biome": "2.3.10",
     "@convex-dev/eslint-plugin": "^1.1.1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
